@@ -8,18 +8,18 @@ public static void main(String args[]) {
 	   List<String> lista = new ArrayList<String>();
 	}
 
-	// Mostrando lista
-	System.out.println("lista criada: " + lista);
+	// mostrando lista
+	System.out.println("lista: " + lista);
 
-	// Mostrando ADD
-	System.out.println("lista de palavras adicionadas: " + addPessoa);
+	// mostrando ADD
+	System.out.println("lista: " + addPessoa);
 
-	//Mostrando a lista depois da remoção:
-	System.out.println("Lista de palavras removidas: "+ delPessoa);
+	//Imprimindo a lista depois da remoção:
+	System.out.println("l Lista de palavras depois do processo de remove(): "+ delPessoa);
 
-	// Mostrando lista getById
-	System.out.println("lista com busca: " + buscaId);
+	// mostrando lista getById
+	System.out.println("lista: " + buscaId);
 	
-	// Mostrando lista getAll
-	System.out.println("lista com busca: " + buscaAll);
+	// mostrando lista getAll
+	System.out.println("lista: " + buscaAll);
 }

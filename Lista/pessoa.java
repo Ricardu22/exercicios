@@ -17,13 +17,14 @@ public class delPessoa {
 
 }
 
-public String buscaId(Joao, id) {
+public String busca(Joao, id) {
    busca lista = Busca.getById(int, id);
    return (Busca == null) ? "Sem retorno" : Busca.toString();
 
 }
 
-public List<buscaAll> getAll() {
+
+public List<lista> getAll() {
   List<lista01> id = new ArrayList<lista>();
   for (lista01 id : lista01.getAll()) {
     if(id.getProperty(Details.class)!=null)
