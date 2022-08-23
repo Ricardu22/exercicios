@@ -1,0 +1,220 @@
+@rem Nome: Ricardo Schnaider
+@rem Descrição da atividade
+
+@rem Desenvolva um programa utilitário baseado em linha de comando. O seu rograma deverá realizar algumas ações sobre o sistema  operacional. O prorama deverá receber por parâmetro as opções para as ações que pode realizar. Além disso, deverá ter as opções  help e version. Documente o seu programa de linha de comando em um arquivo README.md.
+@rem Opções:
+@rem --help : Exibir as opções de uso do programa e sair
+@rem --version : Exibir a versão e sair
+@rem Linguagem: Bash
+@rem https://man7.org/linux/man-pages/man1/wget.1.html
+@rem https://docs.microsoft.com/pt-br/windows-server/administration/windows-commands/cd
+@rem Critérios de Avaliação:
+@rem 1. Entrega no prazo.
+@rem 2. Código desenvolvido
+@rem 2. Complexidade das ações realiazadas pelo utilitário
+@rem 2. Documentação do utilitário
+@rem Penalidades por atraso:
+@rem 1. Com um dia de atraso penalidade de 20%.
+@rem 2. Com  2 dias de atraso, penalidade de 30%.
+@rem 3. Os trabalhos com mais de 2 rem dias de atraso não será aceito.
+@rem Prazo
+@rem Prazo de Entrega: 23 de Agosto até as 23:55.
+@rem Entrega: Anexe o seu código do programa em linha de comando no github e @anexe o link.
+
+@rem +==========+
+@rem Nome do software em desenho
+
+@echo Software:
+@echo  ______  __      __      _        ________   _________  ______
+@echo ^| _____^|^|  \    /  ^|    ^| ^|      ^|  ____  ^| ^|___   ___^|^| _____^|
+@echo ^| ^|___  ^|   \  /   ^|    ^| ^|      ^| ^|    ^| ^|     ^| ^|    ^| ^|___
+@echo ^| ___^|  ^| ^|\ \/ /^| ^|    ^| ^|      ^| ^|    ^| ^|     ^| ^|    ^| ___^| 
+@echo ^| ^|____ ^| ^| \__/ ^| ^|    ^| ^|____  ^| ^|____^| ^|     ^| ^|    ^| ^|____
+@echo ^|______^|^|_^|      ^|_^|____^|______^| ^|________^|     ^|_^|    ^|______^|
+@color 01
+@timeout /t 1
+@color 14
+@timeout /t 1
+@color 46
+@timeout /t 1
+@color 62
+@timeout /t 1
+@color 80
+@timeout /t 1
+@color 07
+@timeout /t 1
+
+@rem +==========+
+@rem Menu com opcoes para a interacao no software
+
+@:opcaoMenuPrincipal
+@cls
+@echo Em_Lote
+@echo Opcoes:
+@echo  ________________________________
+@echo ^| 1. Mostrar data e hora   	 ^|
+@echo ^| 2. Alterar data	 	 ^|
+@echo ^| 3. Alterar hora	 	 ^|
+@echo ^| 4. Criar arquivo	 	 ^|
+@echo ^| 5. Inserir texto no arquivo	 ^|
+@echo ^| 6. Renomear arquivo	 	 ^|
+@echo ^| 7. Abrir arquivo	      	 ^|
+@echo ^| 8. Help	         	 ^|
+@echo ^| 9. Versao	         	 ^|
+@echo ^| 10. Sair		 	 ^|
+@echo ^|________________________________^|
+@set /p opcao=Escolha uma opcao:
+@if %opcao% == 1 (goto :opcao1)
+@if %opcao% == 2 (goto :opcao2)
+@if %opcao% == 3 (goto :opcao3)
+@if %opcao% == 4 (goto :opcao4)
+@if %opcao% == 5 (goto :opcao5)
+@if %opcao% == 6 (goto :opcao6)
+@if %opcao% == 7 (goto :opcao7)
+@if %opcao% == 8 (goto :opcao8)
+@if %opcao% == 9 (goto :opcao9)
+@if %opcao% == 10 (goto :opcao10)
+@echo Escolha uma opcao de 1 a 10
+@pause
+@goto :opcaoMenuPrincipal
+
+@rem ========================================
+@rem Opcao Mostrar data e hora
+
+@:opcao1
+@cls
+@echo 1. Data e Hora
+@date /t
+@time /t
+@pause
+@goto :opcaoMenuCS
+
+@rem ========================================
+rem Opcao Alterar data
+
+@:opcao2
+@cls
+@echo 2. Alterar data
+@date
+@goto :opcao1
+@pause
+
+@rem ========================================
+rem Opcao Alterar hora
+
+@:opcao3
+@cls
+@echo 3. Alterar Hora
+@time
+@goto :opcao1
+@pause
+
+@rem ========================================
+rem Opcao criar arquivo
+
+@:opcao4
+@cls
+@echo 4. Criar arquivo
+@set /p titulo=Informe o titulo:
+@CriarArquivo > %titulo%.txt
+
+@goto :opcaoMenuCS
+
+@rem ========================================
+rem Opcao Inserir texto no arquivo
+
+@:opcao5
+@cls
+@echo 5. Inserir texto no arquivo
+@set /p texto=Informe o texto:
+@echo %texto% >> %titulo%.txt
+
+@goto :opcaoMenuCS
+
+@rem ========================================
+@rem Opcao Renomear arquivo
+
+@:opcao6
+@cls
+@echo 6. Renomear arquivo
+@set /p novoTitulo=Informe o novo titulo:
+@ren %titulo%.txt %novoTitulo%.txt
+
+@goto :opcaoMenuCS
+
+@rem ========================================
+rem Opcao Abrir arquivo
+
+@:opcao7
+@cls
+@echo 7. Abrir arquivo
+if exist %novoTitulo%.txt (
+@start %novoTitulo%.txt
+) else (
+@start %titulo%.txt)
+@timeout /t 10
+@taskkill /im notepad.exe
+@rem @tskill notepad.exe
+
+@goto :opcaoMenuCS
+
+@rem ========================================
+
+rem Opcao Help
+
+@:opcao8
+@cls
+@echo Help
+@echo  Opcoes:
+@echo Opcao 1		Mostrar data e hora = Mostra a data e a hora na tela.
+@echo Opcao 2		Alterar data = Mostra a data na tela.
+@echo Opcao 3		Alterar hora = Mostra a hora na tela.
+@echo Opcao 4		Abrir navegador = Abre o navegador Google Chrome.
+@echo Opcao 5		Criar arquivo = Cria um arquivo chamado teste.txt.
+@echo Opcao 6		Inserir texto no arquivo = Insere no arquivo teste.txt o texto "Ola Mundo".
+@echo Opcao 7		Renomear arquivo = Renomeia o arquivo teste.txt para o nome novoNome.txt.
+@echo Opcao 8		Help = Ajuda com a descrição das opcoes do programa Em_Lote.
+@echo Opcao 9		Versao = Mostra a versao atual do programa Em_Lote.
+@echo Opcao 10	Sair = Sai do programa Em_Lote.
+
+@pause
+@goto :opcaoMenuCS
+
+@rem ========================================
+rem Opcao versao
+
+@:opcao9
+@cls
+@echo version 1.22.08 - release (x86_64 - windows)
+
+@pause
+@goto :opcaoMenuCS
+
+@rem ========================================
+rem Opcao sair
+
+@:opcao10
+exit
+
+@rem ========================================
+@rem Opcao Menu Principal
+
+@rem :opcaoMenuPrincipal
+
+@rem ========================================
+@rem Opcao Menu continuar
+
+@:opcaoMenuCS
+@cls
+@echo Em_Lote
+@echo Opcoes:
+@echo  ________________________
+@echo ^| 1. Continuar           ^|
+@echo ^| 2. Sair		 ^|
+@echo ^|________________________^|
+@set /p cont=Escolha uma opcao:
+@if %cont% == 1 goto :opcaoMenuPrincipal
+@if %cont% == 2 goto :opcao10
+@echo Escolha a opcao de 1 ou 2
+@pause
+@goto :opcaoMenuCS
