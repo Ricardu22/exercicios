@@ -1,0 +1,148 @@
+/**
+ * Exercícios
+ * Instruções:
+ * Desenvolva um aplicativo em Java com a biblioteca Swing para converter o
+ * valor da temperatura.
+ * O usuário poderá escolher a escala da temperatura, informar o seu valor e
+ * para qual escala deverá
+ * ser convertido.
+ * Utilize as escalas Kelvin, fahrenheit e Celsius.
+ * Anexe na ferramenta o link para o seu código hospedado no Github.
+ */
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class ConversorUnidadeTemperatura {
+
+    private final int WIDTH = 350, HEIGHT = 200;
+    private String currentType;
+
+    private String[] scales = { "Celsius", "Fahrenheit", "Kelvin" };
+
+    private JFrame frame;
+    private JComboBox options;
+    private JTextField input;
+    private JLabel output1, output2;
+    private JPanel panel;
+    private Font mainFont;
+
+    public ConversorUnidadeTemperatura() {
+
+        mainFont = new Font("Coves", Font.BOLD, 20);
+
+        frame = new JFrame("Conversor de Temperatura");
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        options = new JComboBox(scales);
+        options.setSelectedIndex(0);
+        options.setFont(mainFont);
+        currentType = "Celsius";
+        options.addActionListener(new ScaleListener());
+
+        input = new JTextField(7);
+        input.setFont(mainFont);
+        input.addActionListener(new TemperatureListener());
+
+        output1 = new JLabel("Fahrenheit:");
+        output1.setForeground(Color.black);
+        output1.setFont(mainFont);
+
+        output2 = new JLabel("Kelvin:");
+        output2.setForeground(Color.black);
+        output2.setFont(mainFont);
+
+        panel = new JPanel();
+        panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        panel.setBackground(new Color(70, 130, 180));
+        panel.add(options);
+        panel.add(input);
+        panel.add(output1);
+        panel.add(output2);
+        panel.setFont(mainFont);
+
+        SpringLayout layout = new SpringLayout();
+        panel.setLayout(layout);
+        layout.putConstraint(SpringLayout.WEST, options, 50, SpringLayout.WEST, panel);
+        layout.putConstraint(SpringLayout.NORTH, options, 20, SpringLayout.NORTH, panel);
+        layout.putConstraint(SpringLayout.WEST, input, 10, SpringLayout.EAST, options);
+        layout.putConstraint(SpringLayout.NORTH, input, 0, SpringLayout.NORTH, options);
+        layout.putConstraint(SpringLayout.WEST, output1, 0, SpringLayout.WEST, options);
+        layout.putConstraint(SpringLayout.VERTICAL_CENTER, output1, 0, SpringLayout.VERTICAL_CENTER, panel);
+        layout.putConstraint(SpringLayout.WEST, output2, 0, SpringLayout.WEST, options);
+        layout.putConstraint(SpringLayout.NORTH, output2, 20, SpringLayout.SOUTH, output1);
+
+        frame.getContentPane().add(panel, BorderLayout.CENTER);
+        frame.pack();
+        frame.setVisible(true);
+
+    }
+
+    private class ScaleListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String inputType = (String) (((JComboBox) e.getSource()).getSelectedItem());
+            currentType = inputType;
+            switch (inputType) {
+                case "Celsius":
+                    output1.setText("Fahrenheit:");
+                    output2.setText("Kelvin:");
+                    break;
+                case "Fahrenheit":
+                    output1.setText("Celsius:");
+                    output2.setText("Kelvin:");
+                    break;
+                case "Kelvin":
+                    output1.setText("Celsius:");
+                    output2.setText("Fahrenheit:");
+                    break;
+                default:
+                    System.out.println("Erro");
+            }
+        }
+
+    }
+
+    private class TemperatureListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            double celsius;
+            double fahrenheit;
+            double kelvin;
+            double temp = Double.parseDouble(input.getText());
+
+            switch (currentType) {
+                case "Celsius":
+                    fahrenheit = (temp * 9 / 5) + 32;
+                    kelvin = temp + 273.15;
+                    output1.setText(String.format("Fahrenheit: %.2f", fahrenheit));
+                    output2.setText(String.format("Kelvin: %.2f", kelvin));
+                    break;
+                case "Fahrenheit":
+                    celsius = (temp - 32) * 5 / 9;
+                    kelvin = celsius + 273.15;
+                    output1.setText(String.format("Celsius: %.2f", celsius));
+                    output2.setText(String.format("Kelvin: %.2f", kelvin));
+                    break;
+                case "Kelvin":
+                    fahrenheit = (temp - 273) * 9 / 5 + 32;
+                    celsius = temp - 273.15;
+                    output1.setText(String.format("Fahrenheit: %.2f", fahrenheit));
+                    output2.setText(String.format("Celsius: %.2f", celsius));
+                    break;
+                default:
+                    System.out.println("Erro");
+            }
+        }
+
+    }
+
+    public static void main(String[] args) {
+        new ConversorUnidadeTemperatura();
+    }
+
+}
