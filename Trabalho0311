@@ -1,0 +1,14 @@
+import javax.swing.*;
+
+public class Main {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Painel de Tarefas");
+        final JLabel label = new JLabel("Tarefas");
+        frame.getContentPane().add(label);
+        frame.pack();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600, 400);
+        frame.setVisible(true);
+
+    }
+}
